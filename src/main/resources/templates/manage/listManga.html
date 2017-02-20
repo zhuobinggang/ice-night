@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache" />
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache" />
+    <META HTTP-EQUIV="Expires" CONTENT="0" />
+
+    <title>冰夜Home</title>
+
+    <!-- Bootstrap -->
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container" style="width: 80%">
+
+    <div class="page-header">
+        <h2>Select a manga to edit</h2>
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <td>Manga Name</td>
+            <td>Comment</td>
+            <td>Logo Path</td>
+            <td>Url</td>
+            <td>Edit</td>
+        </tr>
+        <tr th:each="m:${mangas}">
+            <td th:utext="${m.name}">Manga Name</td>
+            <td th:utext="${m.comment}">Comment</td>
+            <td th:utext="${m.logoPath}">Logo Path</td>
+            <td th:utext="${m.url}">Url</td>
+            <td>
+                <a href="#" th:href="'/mangaEdit?id='+${m.id}">edit it</a>
+            </td>
+        </tr>
+    </table>
+</div> <!-- /container -->
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>

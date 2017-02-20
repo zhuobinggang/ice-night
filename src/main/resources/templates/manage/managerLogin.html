@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache" />
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache" />
+    <META HTTP-EQUIV="Expires" CONTENT="0" />
+
+    <title>冰夜Home</title>
+
+    <!-- Bootstrap -->
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container" style="width: 80%">
+<form class="form-signin" role="form" action="/managerLoginSubmit" method="post">
+        <h2 class="form-signin-heading">管理员登录</h2>
+        <input type="text" name="user" class="form-control" placeholder="Manager Name" />
+        <input type="password" name="pass" class="form-control" placeholder="Password" />
+
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img id="codeImg" src="/getCheckCode" alt="验证码" onclick="chageCode()" />
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">验证码</span>
+                        <input type="text" name="checkCode" class="form-control" placeholder="checkCode" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
+    </form>
+</div> <!-- /container -->
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+
+<script>
+    function chageCode() {
+        $('#codeImg').attr('src', 'authCode.do?abc=' + Math.random())
+    }
+</script>
+
+</html>

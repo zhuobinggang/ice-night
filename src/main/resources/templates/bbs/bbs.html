@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache" />
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache" />
+    <META HTTP-EQUIV="Expires" CONTENT="0" />
+
+    <title>冰夜Home</title>
+
+    <!-- Bootstrap -->
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container" style="width: 80%">
+    <ul class="nav nav-pills" role="tablist">
+        <li role="presentation" ><a href="/index">主页</a></li>
+        <li role="presentation" class="active"><a href="#">留言板</a></li>
+        <li role="presentation"><a href="/manage">管理员入口</a></li>
+    </ul>
+
+    <div class="page-header">
+        <h4>为了方便大家没有设置验证码，请各位千万不要暴力刷屏哦<img src="../../static/img/emoji/rilegou.jpg" th:src="'/img/emoji/rilegou.jpg'" style="height: 35px;width: 35px"/></h4>
+    </div>
+
+    <table class="table table-striped">
+        <tr th:each="b:${bbs}">
+            <td>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" th:utext="${b.name}">昵称</h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="../../static/img/emoji/huaji.jpg" th:src="${b.emoji}" style="height: 35px;width: 35px"/> <span th:utext="${b.comment}">Comment</span>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <!--<h3>Example heading <span class="label label-default"><img src="../../static/img/emoji/huaji.jpg" style="height: 40px;width: 40px"></span></h3>-->
+    </table>
+
+
+    <a class="btn btn-primary" href="#" th:href="'/bbs?page='+(${page}-1)">上一页</a>
+    <a class="btn btn-primary" href="#" th:href="'/bbs?page='+(${page}+1)">下一页</a>
+    <a class="btn btn-primary" href="/say">发表评论</a>
+</div> <!-- /container -->
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>
