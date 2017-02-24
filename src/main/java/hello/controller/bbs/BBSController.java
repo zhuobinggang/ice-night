@@ -2,9 +2,12 @@ package hello.controller.bbs;
 
 import hello.pojo.BBS;
 import hello.repository.BbsRepository;
+import hello.repository.TestRepository;
 import hello.util.Emoji;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,12 +29,13 @@ public class BBSController {
 
         if(page<0)page = 1;
 
-        List<BBS> bbs = bbsDao.findAll(new PageRequest(page-1,3)).getContent();
+        List<BBS> bbs = bbsDao.findAll(new PageRequest(page-1,3, Sort.Direction.DESC,"id")).getContent();
 
         mav.addObject("bbs",bbs);
         mav.addObject("page",page);
         return mav;
     }
+
 
     @RequestMapping("/submitComment")
     public String submitComment(
@@ -46,7 +50,7 @@ public class BBSController {
         System.out.println(bbs);
 
         bbsDao.save(bbs);
-        return "forward:/bbs";
+        return "forward:/bbs2";
     }
 
     @RequestMapping("/say")

@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache" />
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache" />
+    <META HTTP-EQUIV="Expires" CONTENT="0" />
+
+    <title>冰夜Home</title>
+
+    <!-- Bootstrap -->
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container" style="width: 80%">
+    <ul class="nav nav-pills" role="tablist">
+        <li role="presentation" ><a href="/index">主页</a></li>
+        <li role="presentation" class="active"><a href="#">留言板</a></li>
+        <li role="presentation"><a href="/manage">管理员入口</a></li>
+    </ul>
+
+    <div class="page-header">
+        <h4>为了方便大家没有设置验证码，请各位千万不要暴力刷屏哦<img src="../../static/img/emoji/rilegou.jpg" th:src="'/img/emoji/rilegou.jpg'" style="height: 35px;width: 35px"/></h4>
+    </div>
+
+
+    <table class="table table-striped" id="main_table">
+        <div id="loading">now loading...</div>
+    </table>
+
+    <a class="btn btn-primary" href="#" onclick="lastPage()">上一页</a>
+    <a class="btn btn-primary" href="#" onclick="nextPage()">下一页</a>
+    <a class="btn btn-primary" href="/say">发表评论</a>
+</div> <!-- /container -->
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+<script>
+    $(function () {
+        //获取ajax返回值
+        ajaxLoadPage(ajaxSuccess,1)
+    })
+
+    function fillTableLoading() {
+        $("#loading").remove()
+        $("#main_table").html('<div id="loading">now loading...</div>')
+    }
+
+    var pageCount = 1;
+    function nextPage() {
+        fillTableLoading()
+        pageCount++;
+        ajaxLoadPage(ajaxSuccess,pageCount)
+    }
+
+    function lastPage() {
+        fillTableLoading()
+        if(pageCount>1)pageCount--
+        ajaxLoadPage(ajaxSuccess,pageCount)
+    }
+
+    function ajaxSuccess(loadedComment) {
+        console.log("success function : " + loadedComment)
+
+        $("#loading").remove()//清除loading
+        var table;
+
+        $.each(loadedComment,function (index, content) {
+            table += "<tr>"+'<td><div class="panel panel-primary">'
+                    + '<div class="panel-heading">'
+                    + '<h3 class="panel-title">'+content.name+'</h3>'
+                    +'</div>'+'<div class="panel-body">'
+                    +'<img src="'+content.emoji+'" style="height: 35px;width: 35px"/> <span>'+content.comment+'</span>'
+                    +'</div></div></td></tr>';
+
+        })
+
+        $("#main_table").html(table)
+
+    }
+
+    function ajaxLoadPage(successFun,page)
+    {
+        $.ajax({
+            url:'/bbs/ajaxPage',
+            type:'POST', //GET
+            async:true,    //或false,是否异步
+            data:{
+                page: page
+            },
+            timeout:5000,    //超时时间
+            dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+            beforeSend:function(xhr){
+//                console.log(xhr)
+//                console.log('发送前')
+            },
+            success:function (data) {
+                successFun(data)
+            },
+            error:function(xhr,textStatus){
+                console.log('错误')
+                console.log(xhr)
+                console.log(textStatus)
+            },
+            complete:function(){
+//                console.log('结束')
+            }
+        })
+    }
+</script>
+</body>
+</html>

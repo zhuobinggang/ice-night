@@ -15,23 +15,37 @@
 
     <!-- Bootstrap -->
     <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <!--slider-->
+    <link rel="stylesheet" href="../static/css/ideal-image-slider.css" th:href="'/css/ideal-image-slider.css'"/>
+    <link rel="stylesheet" href="../static/css/default.css" th:href="'/css/default.css'"/>
 </head>
 <body>
 <div class="container" style="width: 80%">
 
     <ul class="nav nav-pills" role="tablist">
         <li role="presentation" class="active"><a href="#">主页</a></li>
-        <li role="presentation"><a href="/bbs">留言板</a></li>
+        <li role="presentation"><a href="/bbs2">留言板</a></li>
         <li role="presentation"><a href="/manage">管理员入口</a></li>
+        <!--<li role="presentation"><a href="/test">测试入口</a></li>-->
     </ul>
+    <br/>
 
 
 
-    <div class="row">
-        <div align="center">
-            <img class="img-responsive" src="../static/img/logo.png" alt="Logo" th:src="'/img/logo.png'" style="height: 300px; width: 400px"  />
-        </div>
+    <!--<div class="row">-->
+        <!--<div align="center">-->
+            <!--<img class="img-responsive" src="../static/img/logo.png" alt="Logo" th:src="'/img/logo.png'" style="height: 300px; width: 400px"  />-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--slider-->
+    <div class="row" id="slider" style="max-height: 320px; margin:0 auto;">
+        <img class="sliding" style="width: 100px" src="../static/img/logo.png" th:src="'/img/logo.png'" alt="logo1" />
+        <img class="sliding" style="width: 100px" data-src="../static/img/logo2.png" th:attr="data-src='/img/logo2.png'" src="" alt="logo2" />
+        <img class="sliding" style="width: 100px" data-src="../static/img/logo3.jpg" th:attr="data-src='/img/logo3.jpg'" src="" alt="slide3" />
+        <!--<img class="sliding" data-src="../static/img/jinMen/logo.jpg" src="" alt="人面">-->
+        <!--<a href="http://example.com"><img data-src="img/4.jpg" src="" alt="Links work too"></a>-->
     </div>
+    <br/>
 
     <table class="table table-hover">
 
@@ -65,5 +79,11 @@
 <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<!--slider-->
+<script src="../static/js/ideal-image-slider.min.js" th:src="'/js/ideal-image-slider.min.js'"></script>
+<script>
+    var slider = new IdealImageSlider.Slider('#slider');
+    slider.start()
+</script>
 </body>
 </html>

@@ -1,10 +1,31 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-cn"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>ajax</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--slider-->
+    <!--<link rel="stylesheet" href="/path/to/ideal-image-slider.css">-->
+    <link rel="stylesheet" href="../static/css/ideal-image-slider.css" th:href="'/css/ideal-image-slider.css'"/>
+    <link rel="stylesheet" href="../static/css/default.css" th:href="'/css/default.css'"/>
+    <!--<link rel="stylesheet" href="/path/to/themes/default/default.css">-->
 </head>
-<body>
-    <img src="../static/img/rilegou.jpg" th:src="'/img/rilegou.jpg'" />
+<body style="width: 100%;">
+<div id="slider" style="width: 35%; margin:0 auto;">
+    <img class="sliding" src="../static/img/logo.png" th:src="'/img/logo.png'" alt="世界鬼" />
+    <img class="sliding" data-src="../static/img/logo2.png" th:attr="data-src='/img/logo2.png'" src="" alt="化身为青" />
+    <!--<img class="sliding" data-src="../static/img/jinMen/logo.jpg" src="" alt="人面">-->
+    <!--<a href="http://example.com"><img data-src="img/4.jpg" src="" alt="Links work too"></a>-->
+</div>
+
+<!--slider-->
+<!--<script src="/path/to/ideal-image-slider.js"></script>-->
+<script src="../static/js/ideal-image-slider.min.js" th:src="'/js/ideal-image-slider.min.js'"></script>
+<script>
+    new IdealImageSlider.Slider('#slider');
+</script>
 </body>
 </html>
